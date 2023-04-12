@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">SnowTrick</string>
+    <string name="snow_img"></string>
+    <string name="show_button">Show trick</string>
+    <string name="show_difficulty">Difficulty</string>
+    <string name="show_trick_view">Show trick</string>
+    <string name="get_trick">Get Trick</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="choose_rotation">Select rotation:</string>
+</resources>
