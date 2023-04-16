@@ -7,7 +7,7 @@ class DifficultyTrick {
     )
 
     private val _mediumTrick = listOf("japan", "crail", "rocket air",
-        "stelmasky", "roast beef", "suit case",
+        "stelmasky", "roast beef", "suitcase",
     )
 
     private val _hardTrick = listOf("cross rocket", "double tail", "reach around", "method")

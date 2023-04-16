@@ -31,10 +31,19 @@ class MainActivity : AppCompatActivity(),
     private var trickDifficulty = DifficultyTrick()
 
     private var stance = "goofy"
+//    private val checkStance = stance == "goofy"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
+//        переключение стойки
+        val stanceButton: ToggleButton = findViewById(R.id.stance_button)
+        stanceButton.setOnCheckedChangeListener { _, isChecked ->
+            stance = if (isChecked) "regular" else "goofy"
+            println(stance)
+        }
 
 //Жмем по кнопке и получаем трюк
         showTrickView = findViewById(R.id.show_trick_view)
@@ -70,7 +79,33 @@ class MainActivity : AppCompatActivity(),
                 rotation = checkRandomTrick,
                 trick = checkDifficultyTrick
             ).toString()
+
             showTrickView.text = showTextResId
+
+            when {
+                "Indy" in showTextResId && stance == "goofy" -> snowboardImg.setImageResource(R.drawable.goofy_indy)
+                "Melon" in showTextResId && stance == "goofy" -> snowboardImg.setImageResource(R.drawable.goofy_melon)
+                "Mute" in showTextResId && stance == "goofy" -> snowboardImg.setImageResource(R.drawable.goofy_mute)
+                "Nose" in showTextResId && stance == "goofy" -> snowboardImg.setImageResource(R.drawable.goofy_nose)
+                "Stalefish" in showTextResId && stance == "goofy" -> snowboardImg.setImageResource(R.drawable.goofy_stalefish)
+                "Tail" in showTextResId && stance == "goofy" -> snowboardImg.setImageResource(R.drawable.goofy_tail)
+                "Japan" in showTextResId && stance == "goofy" -> snowboardImg.setImageResource(R.drawable.goofy_japan)
+                "Slob" in showTextResId && stance == "goofy" -> snowboardImg.setImageResource(R.drawable.goofy_slob)
+                "Crail" in showTextResId && stance == "goofy" -> snowboardImg.setImageResource(R.drawable.goofy_crail)
+                "Stelmasky" in showTextResId && stance == "goofy" -> snowboardImg.setImageResource(R.drawable.goofy_stelmasky)
+                "Roast beef" in showTextResId && stance == "goofy" -> snowboardImg.setImageResource(R.drawable.goofy_roast_beef)
+                "Suit case" in showTextResId && stance == "goofy" -> snowboardImg.setImageResource(R.drawable.goofy_suitcase)
+                "Reach around" in showTextResId && stance == "goofy" -> snowboardImg.setImageResource(R.drawable.goofy_reach_around)
+                "Method" in showTextResId && stance == "goofy" -> snowboardImg.setImageResource(R.drawable.goofy_method)
+                "Crail" in showTextResId && stance == "regular" -> snowboardImg.setImageResource(R.drawable.goofy_crail)
+                "Suit case" in showTextResId && stance == "regular" -> snowboardImg.setImageResource(R.drawable.goofy_suitcase)
+                "Reach around" in showTextResId && stance == "regular" -> snowboardImg.setImageResource(R.drawable.goofy_reach_around)
+                "Rocket air" in showTextResId -> snowboardImg.setImageResource(R.drawable.rocket_air)
+                "Double tail" in showTextResId -> snowboardImg.setImageResource(R.drawable.double_tail)
+                "Cross rocket" in showTextResId -> snowboardImg.setImageResource(R.drawable.cross_rocket)
+            }
+
+//            println(showTextResId)
         }
 //          Показываем алерт
         showMenuButton = findViewById(R.id.show_menu)
@@ -85,11 +120,7 @@ class MainActivity : AppCompatActivity(),
             difficultyFragment.show(supportFragmentManager, "show_difficulty")
         }
 
-//        переключение стойки
-        val stanceButton: ToggleButton = findViewById(R.id.stance_button)
-        stanceButton.setOnCheckedChangeListener { _, isChecked ->
-            stance = if (isChecked) "regular" else "goofy"
-        }
+
 
 //        нажимая на картинку борда начинаем вращать ее (анимация вращения)
         snowboardImg = findViewById(R.id.snow_img)

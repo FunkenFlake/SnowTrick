@@ -62,3 +62,11 @@ class SnowTricks {
     }
 
 }
+
+//fun checkTextResId(trick: String) {
+//    when (trick) {
+//        in "Indy" -> trick.setImageResource(R.drawable.goofy_indy)
+//        in "Melon" -> trick.setImageResource(R.drawable.goofy_melon)
+//        in "Mute" -> trick.setImageResource(R.drawable.goofy_mute)
+//    }
+//}
