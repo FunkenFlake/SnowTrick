@@ -23,14 +23,15 @@ class MainActivity : AppCompatActivity(),
     private lateinit var showDifficultyButton: ImageButton
     private lateinit var showMenuButton: ImageButton
     private lateinit var showTrickView: TextView
-    private lateinit var snowboardImg: ImageView
+    private lateinit var showTextResId: String
+//    private lateinit var snowboardImg: ImageView [скорее всего уже будет не нужно]
 
 
 //    Экзепляры проверяющих трюк классов
     private var trick = SnowTricks()
     private var trickDifficulty = DifficultyTrick()
 
-    private var stance = "goofy"
+    private var stance = Stance.Goofy
 //    private val checkStance = stance == "goofy"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +42,7 @@ class MainActivity : AppCompatActivity(),
 //        переключение стойки
         val stanceButton: ToggleButton = findViewById(R.id.stance_button)
         stanceButton.setOnCheckedChangeListener { _, isChecked ->
-            stance = if (isChecked) "regular" else "goofy"
+            stance = if (isChecked) Stance.Regular else Stance.Goofy
             println(stance)
         }
 
@@ -49,8 +50,10 @@ class MainActivity : AppCompatActivity(),
         showTrickView = findViewById(R.id.show_trick_view)
         showTrickButton = findViewById(R.id.show_button)
         showTrickButton.setOnClickListener {
+            println(fromListDialogDifficulty)
 
-//            Проверяем, что вернулось из MyDialogFragment
+            // ТУТ ЗАКОММЕНТИЛ СТАРУЮ РЕАЛИЗАЦИЮ
+/*//            Проверяем, что вернулось из MyDialogFragment
             val (trickOneEighty: Boolean,
                 trickThreeSixty: Boolean,
                 trickGrabs: Boolean) = trick.tripleRotation(fromListDialog)
@@ -78,11 +81,21 @@ class MainActivity : AppCompatActivity(),
             val showTextResId = trick.getRandomTrickAll(
                 rotation = checkRandomTrick,
                 trick = checkDifficultyTrick
-            ).toString()
+            ).toString()*/
+
+            showTextResId = when  {
+                0 in fromListDialogDifficulty -> SnowboardTrick.grabsEasy.random().getTrick()
+                1 in fromListDialogDifficulty -> SnowboardTrick.grabsMedium.random().getTrick()
+                2 in fromListDialogDifficulty -> SnowboardTrick.grabsHard.random().getTrick()
+                else -> SnowboardTrick.grabsEasy.random().getTrick()
+            }
+
+            val newSnowTrickList: Array<SnowboardTrick> = SnowboardTrick.grabsEasy + SnowboardTrick.grabsMedium
+//            val showTextResId = SnowboardTrick.grabsEasy.random().getTrick()
 
             showTrickView.text = showTextResId
 
-            when {
+/*            when {
                 "Indy" in showTextResId && stance == "goofy" -> snowboardImg.setImageResource(R.drawable.goofy_indy)
                 "Melon" in showTextResId && stance == "goofy" -> snowboardImg.setImageResource(R.drawable.goofy_melon)
                 "Mute" in showTextResId && stance == "goofy" -> snowboardImg.setImageResource(R.drawable.goofy_mute)
@@ -103,7 +116,7 @@ class MainActivity : AppCompatActivity(),
                 "Rocket air" in showTextResId -> snowboardImg.setImageResource(R.drawable.rocket_air)
                 "Double tail" in showTextResId -> snowboardImg.setImageResource(R.drawable.double_tail)
                 "Cross rocket" in showTextResId -> snowboardImg.setImageResource(R.drawable.cross_rocket)
-            }
+            }*/
 
 //            println(showTextResId)
         }
@@ -123,8 +136,8 @@ class MainActivity : AppCompatActivity(),
 
 
 //        нажимая на картинку борда начинаем вращать ее (анимация вращения)
-        snowboardImg = findViewById(R.id.snow_img)
-        snowboardImg.setOnClickListener {
+        snowboardingImg = findViewById(R.id.snow_img)
+        snowboardingImg.setOnClickListener {
 //            подгружаем анимации в переменные (по часовой и против часовой стрелки)
             val clickClockWiseRotate = AnimationUtils.loadAnimation(
                 this,
@@ -136,10 +149,10 @@ class MainActivity : AppCompatActivity(),
             )
 //            воспроизводим анимацию в зависимости от направления вращения (direction)
             when {
-                "FS" in showTrickView.text && stance == "goofy" -> snowboardImg.startAnimation(clickClockWiseRotate)
-                "BS" in showTrickView.text && stance == "goofy" -> snowboardImg.startAnimation(clickAntiClockWise)
-                "BS" in showTrickView.text && stance == "regular" -> snowboardImg.startAnimation(clickClockWiseRotate)
-                "FS" in showTrickView.text && stance == "regular" -> snowboardImg.startAnimation(clickAntiClockWise)
+                "FS" in showTrickView.text && stance == Stance.Goofy -> snowboardingImg.startAnimation(clickClockWiseRotate)
+                "BS" in showTrickView.text && stance == Stance.Goofy -> snowboardingImg.startAnimation(clickAntiClockWise)
+                "BS" in showTrickView.text && stance == Stance.Regular -> snowboardingImg.startAnimation(clickClockWiseRotate)
+                "FS" in showTrickView.text && stance == Stance.Regular -> snowboardingImg.startAnimation(clickAntiClockWise)
             }
         }
     }
