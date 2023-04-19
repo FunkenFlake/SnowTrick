@@ -38,7 +38,6 @@ class MainActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
 //        переключение стойки
         val stanceButton: ToggleButton = findViewById(R.id.stance_button)
         stanceButton.setOnCheckedChangeListener { _, isChecked ->
@@ -83,17 +82,24 @@ class MainActivity : AppCompatActivity(),
                 trick = checkDifficultyTrick
             ).toString()*/
 
-            showTextResId = when  {
-                0 in fromListDialogDifficulty -> SnowboardTrick.grabsEasy.random().getTrick()
-                1 in fromListDialogDifficulty -> SnowboardTrick.grabsMedium.random().getTrick()
-                2 in fromListDialogDifficulty -> SnowboardTrick.grabsHard.random().getTrick()
-                else -> SnowboardTrick.grabsEasy.random().getTrick()
-            }
 
-            val newSnowTrickList: Array<SnowboardTrick> = SnowboardTrick.grabsEasy + SnowboardTrick.grabsMedium
+            if (fromListDialogDifficulty.isNotEmpty()) {
+                SnowboardTrick.allGrabs = arrayOf()
+            }
+            fromListDialogDifficulty.forEach {
+                when (it) {
+                    0 -> SnowboardTrick.allGrabs += SnowboardTrick.grabsEasy
+                    1 -> SnowboardTrick.allGrabs += SnowboardTrick.grabsMedium
+                    2 -> SnowboardTrick.allGrabs += SnowboardTrick.grabsHard
+                    }
+                }
+
+//            showTextResId =
+
+//            val newSnowTrickList: Array<SnowboardTrick> = SnowboardTrick.grabsEasy + SnowboardTrick.grabsMedium
 //            val showTextResId = SnowboardTrick.grabsEasy.random().getTrick()
 
-            showTrickView.text = showTextResId
+            showTrickView.text = SnowboardTrick.allGrabs.flatten().random().getTrick()
 
 /*            when {
                 "Indy" in showTextResId && stance == "goofy" -> snowboardImg.setImageResource(R.drawable.goofy_indy)
@@ -132,8 +138,6 @@ class MainActivity : AppCompatActivity(),
             val difficultyFragment = CheckDifficultyFragment()
             difficultyFragment.show(supportFragmentManager, "show_difficulty")
         }
-
-
 
 //        нажимая на картинку борда начинаем вращать ее (анимация вращения)
         snowboardingImg = findViewById(R.id.snow_img)

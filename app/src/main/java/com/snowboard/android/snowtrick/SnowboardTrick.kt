@@ -121,6 +121,7 @@ enum class SnowboardTrick {
         val grabsEasy = arrayOf(Melon, Indy, Mute, Slob, Nose, Tail, Stalefish, Method)
         val grabsMedium = arrayOf(Japan, Crail, RocketAir, Stelmasky, RoastBeef, Suitcase)
         val grabsHard = arrayOf(CrossRocket, DoubleTail, ReachAround, Method)
+        var allGrabs = arrayOf<Array<SnowboardTrick>>(grabsEasy)
 
 
     }
