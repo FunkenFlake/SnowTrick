@@ -4,118 +4,124 @@ import android.annotation.SuppressLint
 import android.widget.ImageView
 
 private val direction = arrayOf(Direction.BS, Direction.FS)
-private val rotation = setOf(Rotation.OneEighty.id, Rotation.ThreeSixty.id)
+var rotation = mutableSetOf(Rotation.OneEighty.id, Rotation.ThreeSixty.id)
 var stance = arrayOf(Stance.Goofy, Stance.Regular)
 
 @SuppressLint("StaticFieldLeak")
 lateinit var snowboardingImg: ImageView
 
-enum class SnowboardTrick {
-    Melon {
+enum class SnowboardTrick(private val id: String) {
+    Melon("melon") {
         override fun getTrick(): String {
             snowboardingImg.setImageResource(R.drawable.goofy_melon)
-            return "${direction.random()} $Melon ${rotation.random()}"
+            return returnGrab(Melon, rotation)
         }
     },
-    Indy {
+    Indy("indy") {
         override fun getTrick(): String {
             snowboardingImg.setImageResource(R.drawable.goofy_indy)
-            return "${direction.random()} $Indy ${rotation.random()}"
+            return returnGrab(Indy, rotation)
         }
     },
-    Mute {
+    Mute("mute") {
         override fun getTrick(): String {
             snowboardingImg.setImageResource(R.drawable.goofy_mute)
-            return "${direction.random()} $Mute ${rotation.random()}"
+            return returnGrab(Mute, rotation)
         }
     },
-    Slob {
+    Slob("slob") {
         override fun getTrick(): String {
             snowboardingImg.setImageResource(R.drawable.goofy_slob)
-            return "${direction.random()} $Slob ${rotation.random()}"
+            return returnGrab(Slob, rotation)
         }
     },
-    Nose {
+    Nose("nose") {
         override fun getTrick(): String {
             snowboardingImg.setImageResource(R.drawable.goofy_nose)
-            return "${direction.random()} $Nose ${rotation.random()}"
+            return returnGrab(Nose, rotation)
         }
     },
-    Tail {
+    Tail("tail") {
         override fun getTrick(): String {
             snowboardingImg.setImageResource(R.drawable.goofy_tail)
-            return "${direction.random()} $Tail ${rotation.random()}"
+            return returnGrab(Tail, rotation)
         }
     },
-    Stalefish {
+    Stalefish("stalfish") {
         override fun getTrick(): String {
             snowboardingImg.setImageResource(R.drawable.goofy_stalefish)
-            return "${direction.random()} $Stalefish ${rotation.random()}"
+            return returnGrab(Stalefish, rotation)
         }
     },
-    Method {
+    Method("method") {
         override fun getTrick(): String {
             snowboardingImg.setImageResource(R.drawable.goofy_method)
-            return "${direction.random()} $Method ${rotation.random()}"
+            return returnGrab(Method, rotation)
         }
     },
-    Japan {
+    Japan("japan") {
         override fun getTrick(): String {
             snowboardingImg.setImageResource(R.drawable.goofy_japan)
-            return "${direction.random()} $Japan ${rotation.random()}"
+            return returnGrab(Japan, rotation)
         }
     },
-    Crail {
+    Crail("crail") {
         override fun getTrick(): String {
             snowboardingImg.setImageResource(R.drawable.goofy_crail)
-            return "${direction.random()} $Crail ${rotation.random()}"
+            return returnGrab(Crail, rotation)
         }
     },
-    RocketAir {
+    RocketAir("rocket air") {
         override fun getTrick(): String {
             snowboardingImg.setImageResource(R.drawable.rocket_air)
-            return "${direction.random()} $RocketAir ${rotation.random()}"
+            return returnGrab(RocketAir, rotation)
         }
     },
-    Stelmasky {
+    Stelmasky("stelmasky") {
         override fun getTrick(): String {
             snowboardingImg.setImageResource(R.drawable.goofy_stelmasky)
-            return "${direction.random()} $Stelmasky ${rotation.random()}"
+            return returnGrab(Stelmasky, rotation)
         }
     },
-    RoastBeef {
+    RoastBeef("roast beef") {
         override fun getTrick(): String {
             snowboardingImg.setImageResource(R.drawable.goofy_roast_beef)
-            return "${direction.random()} $RoastBeef ${rotation.random()}"
+            return returnGrab(RoastBeef, rotation)
         }
     },
-    Suitcase {
+    Suitcase("suitcase") {
         override fun getTrick(): String {
             snowboardingImg.setImageResource(R.drawable.goofy_suitcase)
-            return "${direction.random()} $Suitcase ${rotation.random()}"
+            return returnGrab(Suitcase, rotation)
         }
     },
-        CrossRocket {
+    CrossRocket("cross rocket") {
         override fun getTrick(): String {
             snowboardingImg.setImageResource(R.drawable.cross_rocket)
-            return "${direction.random()} $CrossRocket ${rotation.random()}"
+            return returnGrab(CrossRocket, rotation)
         }
     },
-        DoubleTail {
+    DoubleTail("double tail") {
         override fun getTrick(): String {
             snowboardingImg.setImageResource(R.drawable.double_tail)
-            return "${direction.random()} $DoubleTail ${rotation.random()}"
+            return returnGrab(DoubleTail, rotation)
         }
     },
-        ReachAround {
+    ReachAround("reach around") {
         override fun getTrick(): String {
             snowboardingImg.setImageResource(R.drawable.goofy_reach_around)
-            return "${direction.random()} $ReachAround ${rotation.random()}"
+            return returnGrab(ReachAround, rotation)
         }
-    },
-    ;
+    };
 
     abstract fun getTrick(): String
+
+    fun returnGrab(grab: SnowboardTrick, rotation: MutableSet<Int>): String {
+        return when (val rotationRandom = rotation.random()) {
+            Rotation.Zero.id -> grab.id.upperFirstChar()
+            else -> "${direction.random()} ${grab.id.upperFirstChar()} $rotationRandom"
+        }
+    }
 
     companion object {
         val grabsEasy = arrayOf(Melon, Indy, Mute, Slob, Nose, Tail, Stalefish, Method)
@@ -133,6 +139,7 @@ enum class Direction {
 }
 
 enum class Rotation(val id: Int) {
+    Zero(0),
     OneEighty(180),
     ThreeSixty(360),
 }

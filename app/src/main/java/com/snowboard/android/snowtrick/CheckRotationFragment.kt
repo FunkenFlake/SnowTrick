@@ -6,7 +6,7 @@ import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 
-class MyDialogFragment : DialogFragment() {
+class CheckRotationFragment : DialogFragment() {
 
     lateinit var listener: MyDialogListener
     lateinit var listenerItems: OnDialogSelectedItems

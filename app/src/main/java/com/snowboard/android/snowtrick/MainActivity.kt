@@ -5,17 +5,20 @@ import android.os.Bundle
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.ToggleButton
 import androidx.fragment.app.DialogFragment
+import com.snowboard.android.snowtrick.SnowboardTrick.Companion.allGrabs
+import com.snowboard.android.snowtrick.SnowboardTrick.Companion.grabsEasy
+import com.snowboard.android.snowtrick.SnowboardTrick.Companion.grabsMedium
+import com.snowboard.android.snowtrick.SnowboardTrick.Companion.grabsHard
 
 class MainActivity : AppCompatActivity(),
-    MyDialogFragment.MyDialogListener, MyDialogFragment.OnDialogSelectedItems,
+    CheckRotationFragment.MyDialogListener, CheckRotationFragment.OnDialogSelectedItems,
     CheckDifficultyFragment.OnDialogSelectedItems {
 
 //    Два списка для возврата данных из диалогов
-    var fromListDialog: ArrayList<Int> = arrayListOf()
+    var fromListDialogRotation: ArrayList<Int> = arrayListOf()
     var fromListDialogDifficulty: ArrayList<Int> = arrayListOf()
 
 //    Переменные для кнопок и текст. полей ну и прочего
@@ -82,15 +85,24 @@ class MainActivity : AppCompatActivity(),
                 trick = checkDifficultyTrick
             ).toString()*/
 
-
-            if (fromListDialogDifficulty.isNotEmpty()) {
-                SnowboardTrick.allGrabs = arrayOf()
+            if (fromListDialogRotation.isNotEmpty()) rotation.clear()
+            fromListDialogRotation.forEach {
+                when (it) {
+                    0 -> rotation += Rotation.Zero.id
+                    1 -> rotation += Rotation.OneEighty.id
+                    2 -> rotation += Rotation.ThreeSixty.id
+                }
             }
+
+            // Если список difficulty не пустой, то чистим список allGrabs и добавляем в него
+            // те грэбы, которые были отмеченны в difficulty
+            if (fromListDialogDifficulty.isNotEmpty()) allGrabs = arrayOf()
+
             fromListDialogDifficulty.forEach {
                 when (it) {
-                    0 -> SnowboardTrick.allGrabs += SnowboardTrick.grabsEasy
-                    1 -> SnowboardTrick.allGrabs += SnowboardTrick.grabsMedium
-                    2 -> SnowboardTrick.allGrabs += SnowboardTrick.grabsHard
+                    0 -> allGrabs += grabsEasy
+                    1 -> allGrabs += grabsMedium
+                    2 -> allGrabs += grabsHard
                     }
                 }
 
@@ -99,7 +111,7 @@ class MainActivity : AppCompatActivity(),
 //            val newSnowTrickList: Array<SnowboardTrick> = SnowboardTrick.grabsEasy + SnowboardTrick.grabsMedium
 //            val showTextResId = SnowboardTrick.grabsEasy.random().getTrick()
 
-            showTrickView.text = SnowboardTrick.allGrabs.flatten().random().getTrick()
+            showTrickView.text = allGrabs.flatten().random().getTrick()
 
 /*            when {
                 "Indy" in showTextResId && stance == "goofy" -> snowboardImg.setImageResource(R.drawable.goofy_indy)
@@ -129,8 +141,8 @@ class MainActivity : AppCompatActivity(),
 //          Показываем алерт
         showMenuButton = findViewById(R.id.show_menu)
         showMenuButton.setOnClickListener {
-            val myDialogFragment = MyDialogFragment()
-            myDialogFragment.show(supportFragmentManager, "show_menu")
+            val checkRotationFragment = CheckRotationFragment()
+            checkRotationFragment.show(supportFragmentManager, "show_menu")
         }
 //        Кнопка сложности, вместе с показам алертДиалога
         showDifficultyButton = findViewById(R.id.show_difficulty)
@@ -153,10 +165,10 @@ class MainActivity : AppCompatActivity(),
             )
 //            воспроизводим анимацию в зависимости от направления вращения (direction)
             when {
-                "FS" in showTrickView.text && stance == Stance.Goofy -> snowboardingImg.startAnimation(clickClockWiseRotate)
-                "BS" in showTrickView.text && stance == Stance.Goofy -> snowboardingImg.startAnimation(clickAntiClockWise)
-                "BS" in showTrickView.text && stance == Stance.Regular -> snowboardingImg.startAnimation(clickClockWiseRotate)
-                "FS" in showTrickView.text && stance == Stance.Regular -> snowboardingImg.startAnimation(clickAntiClockWise)
+                "FS" in showTrickView.text && stance == Stance.Goofy    -> snowboardingImg.startAnimation(clickClockWiseRotate)
+                "BS" in showTrickView.text && stance == Stance.Goofy    -> snowboardingImg.startAnimation(clickAntiClockWise)
+                "BS" in showTrickView.text && stance == Stance.Regular  -> snowboardingImg.startAnimation(clickClockWiseRotate)
+                "FS" in showTrickView.text && stance == Stance.Regular  -> snowboardingImg.startAnimation(clickAntiClockWise)
             }
         }
     }
@@ -174,7 +186,7 @@ class MainActivity : AppCompatActivity(),
 
 //    переопределяем функцию выбранных элементов в диалоге rotation и присваиваем их нашей переменной
     override fun onSelectedItems(selectedItems: ArrayList<Int>) {
-        fromListDialog = selectedItems
+        fromListDialogRotation = selectedItems
     }
 //    переопределяем функцию выбранных элементов в диалоге difficulty и присваиваем их нашей переменной
     override fun onSelectedItemsDifficulty(selectedItems: ArrayList<Int>) {
