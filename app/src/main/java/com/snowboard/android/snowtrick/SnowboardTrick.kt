@@ -5,7 +5,7 @@ import android.widget.ImageView
 
 private val direction = arrayOf(Direction.BS, Direction.FS)
 var rotation = mutableSetOf(Rotation.OneEighty.id, Rotation.ThreeSixty.id)
-var stance = arrayOf(Stance.Goofy, Stance.Regular)
+var stance = Stance.Goofy
 
 @SuppressLint("StaticFieldLeak")
 lateinit var snowboardingImg: ImageView
@@ -13,61 +13,91 @@ lateinit var snowboardingImg: ImageView
 enum class SnowboardTrick(private val id: String) {
     Melon("melon") {
         override fun getTrick(): String {
-            snowboardingImg.setImageResource(R.drawable.goofy_melon)
+            when (stance) {
+                Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_melon)
+                Stance.Regular -> snowboardingImg.setImageResource(R.drawable.regular_melon)
+            }
             return returnGrab(Melon, rotation)
         }
     },
     Indy("indy") {
         override fun getTrick(): String {
-            snowboardingImg.setImageResource(R.drawable.goofy_indy)
+            when (stance) {
+                Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_indy)
+                Stance.Regular -> snowboardingImg.setImageResource(R.drawable.regular_indy)
+            }
             return returnGrab(Indy, rotation)
         }
     },
     Mute("mute") {
         override fun getTrick(): String {
-            snowboardingImg.setImageResource(R.drawable.goofy_mute)
+            when (stance) {
+                Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_mute)
+                Stance.Regular -> snowboardingImg.setImageResource(R.drawable.regular_mute)
+            }
             return returnGrab(Mute, rotation)
         }
     },
     Slob("slob") {
         override fun getTrick(): String {
-            snowboardingImg.setImageResource(R.drawable.goofy_slob)
+            when (stance) {
+                Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_slob)
+                Stance.Regular -> snowboardingImg.setImageResource(R.drawable.regular_slob)
+            }
             return returnGrab(Slob, rotation)
         }
     },
     Nose("nose") {
         override fun getTrick(): String {
-            snowboardingImg.setImageResource(R.drawable.goofy_nose)
+            when (stance) {
+                Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_nose)
+                Stance.Regular -> snowboardingImg.setImageResource(R.drawable.regular_nose)
+            }
             return returnGrab(Nose, rotation)
         }
     },
     Tail("tail") {
         override fun getTrick(): String {
-            snowboardingImg.setImageResource(R.drawable.goofy_tail)
+            when (stance) {
+                Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_tail)
+                Stance.Regular -> snowboardingImg.setImageResource(R.drawable.regular_tail)
+            }
             return returnGrab(Tail, rotation)
         }
     },
     Stalefish("stalfish") {
         override fun getTrick(): String {
-            snowboardingImg.setImageResource(R.drawable.goofy_stalefish)
+            when (stance) {
+                Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_stalefish)
+                Stance.Regular -> snowboardingImg.setImageResource(R.drawable.regular_stalefish)
+            }
             return returnGrab(Stalefish, rotation)
         }
     },
     Method("method") {
         override fun getTrick(): String {
-            snowboardingImg.setImageResource(R.drawable.goofy_method)
+            when (stance) {
+                Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_method)
+                Stance.Regular -> snowboardingImg.setImageResource(R.drawable.regular_method)
+            }
             return returnGrab(Method, rotation)
         }
     },
     Japan("japan") {
         override fun getTrick(): String {
-            snowboardingImg.setImageResource(R.drawable.goofy_japan)
+            when (stance) {
+                Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_japan)
+                Stance.Regular -> snowboardingImg.setImageResource(R.drawable.regular_japan)
+            }
             return returnGrab(Japan, rotation)
         }
     },
     Crail("crail") {
         override fun getTrick(): String {
-            snowboardingImg.setImageResource(R.drawable.goofy_crail)
+            when (stance) {
+                Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_crail)
+                Stance.Regular -> snowboardingImg.setImageResource(R.drawable.regular_crail)
+            }
             return returnGrab(Crail, rotation)
         }
     },
@@ -79,19 +109,28 @@ enum class SnowboardTrick(private val id: String) {
     },
     Stelmasky("stelmasky") {
         override fun getTrick(): String {
-            snowboardingImg.setImageResource(R.drawable.goofy_stelmasky)
+            when (stance) {
+                Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_stelmasky)
+                Stance.Regular -> snowboardingImg.setImageResource(R.drawable.regular_stelmasky)
+            }
             return returnGrab(Stelmasky, rotation)
         }
     },
     RoastBeef("roast beef") {
         override fun getTrick(): String {
-            snowboardingImg.setImageResource(R.drawable.goofy_roast_beef)
+            when (stance) {
+                Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_roast_beef)
+                Stance.Regular -> snowboardingImg.setImageResource(R.drawable.regular_roast_beef)
+            }
             return returnGrab(RoastBeef, rotation)
         }
     },
     Suitcase("suitcase") {
         override fun getTrick(): String {
-            snowboardingImg.setImageResource(R.drawable.goofy_suitcase)
+            when (stance) {
+                Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_suitcase)
+                Stance.Regular -> snowboardingImg.setImageResource(R.drawable.regular_suitcase)
+            }
             return returnGrab(Suitcase, rotation)
         }
     },
@@ -109,7 +148,10 @@ enum class SnowboardTrick(private val id: String) {
     },
     ReachAround("reach around") {
         override fun getTrick(): String {
-            snowboardingImg.setImageResource(R.drawable.goofy_reach_around)
+            when (stance) {
+                Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_reach_around)
+                Stance.Regular -> snowboardingImg.setImageResource(R.drawable.regular_reach_around)
+            }
             return returnGrab(ReachAround, rotation)
         }
     };
@@ -128,8 +170,6 @@ enum class SnowboardTrick(private val id: String) {
         val grabsMedium = arrayOf(Japan, Crail, RocketAir, Stelmasky, RoastBeef, Suitcase)
         val grabsHard = arrayOf(CrossRocket, DoubleTail, ReachAround, Method)
         var allGrabs = arrayOf<Array<SnowboardTrick>>(grabsEasy)
-
-
     }
 }
 

@@ -27,19 +27,22 @@ class MainActivity : AppCompatActivity(),
     private lateinit var showMenuButton: ImageButton
     private lateinit var showTrickView: TextView
     private lateinit var showTextResId: String
+
 //    private lateinit var snowboardImg: ImageView [скорее всего уже будет не нужно]
 
 
 //    Экзепляры проверяющих трюк классов
-    private var trick = SnowTricks()
-    private var trickDifficulty = DifficultyTrick()
+//    private var trick = SnowTricks()
+//    private var trickDifficulty = DifficultyTrick()
 
-    private var stance = Stance.Goofy
+//    var stance = Stance.Goofy
 //    private val checkStance = stance == "goofy"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
 
 //        переключение стойки
         val stanceButton: ToggleButton = findViewById(R.id.stance_button)
@@ -52,7 +55,7 @@ class MainActivity : AppCompatActivity(),
         showTrickView = findViewById(R.id.show_trick_view)
         showTrickButton = findViewById(R.id.show_button)
         showTrickButton.setOnClickListener {
-            println(fromListDialogDifficulty)
+//            println(fromListDialogDifficulty)
 
             // ТУТ ЗАКОММЕНТИЛ СТАРУЮ РЕАЛИЗАЦИЮ
 /*//            Проверяем, что вернулось из MyDialogFragment
@@ -136,7 +139,6 @@ class MainActivity : AppCompatActivity(),
                 "Cross rocket" in showTextResId -> snowboardImg.setImageResource(R.drawable.cross_rocket)
             }*/
 
-//            println(showTextResId)
         }
 //          Показываем алерт
         showMenuButton = findViewById(R.id.show_menu)
@@ -173,6 +175,8 @@ class MainActivity : AppCompatActivity(),
         }
     }
 
+                    // ТУТ НАДО ПЕРЕБРАТЬ ВСЕ ИЛИ ХОТЯ БЫ ЧАСТЬ
+                    // это очень важно, даже капсом написал!
 
     //    Назначаем перезаписью действие для кнопки "ОК"
     override fun onDialogPositiveClick(dialog: DialogFragment) {
