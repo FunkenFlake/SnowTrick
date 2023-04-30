@@ -164,7 +164,6 @@ enum class SnowboardTrick(private val id: String) {
             else -> "${direction.random()} ${grab.id.upperFirstChar()} $rotationRandom"
         }
     }
-
     companion object {
         val grabsEasy = arrayOf(Melon, Indy, Mute, Slob, Nose, Tail, Stalefish, Method)
         val grabsMedium = arrayOf(Japan, Crail, RocketAir, Stelmasky, RoastBeef, Suitcase)

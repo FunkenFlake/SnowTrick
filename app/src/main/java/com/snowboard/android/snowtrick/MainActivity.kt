@@ -2,7 +2,6 @@ package com.snowboard.android.snowtrick
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
@@ -18,30 +17,22 @@ class MainActivity : AppCompatActivity(),
     CheckDifficultyFragment.OnDialogSelectedItems {
 
 //    Два списка для возврата данных из диалогов
-    var fromListDialogRotation: ArrayList<Int> = arrayListOf()
-    var fromListDialogDifficulty: ArrayList<Int> = arrayListOf()
+    private var fromListDialogRotation: ArrayList<Int> = arrayListOf()
+    private var fromListDialogDifficulty: ArrayList<Int> = arrayListOf()
 
 //    Переменные для кнопок и текст. полей ну и прочего
     private lateinit var showTrickButton: Button
     private lateinit var showDifficultyButton: ImageButton
     private lateinit var showMenuButton: ImageButton
-    private lateinit var showTrickView: TextView
+    lateinit var showTrickView: TextView
     private lateinit var showTextResId: String
-
-//    private lateinit var snowboardImg: ImageView [скорее всего уже будет не нужно]
-
-
-//    Экзепляры проверяющих трюк классов
-//    private var trick = SnowTricks()
-//    private var trickDifficulty = DifficultyTrick()
-
-//    var stance = Stance.Goofy
-//    private val checkStance = stance == "goofy"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+//        экэемпляр анимаций
+        val animatorBoard = RotationAnimation()
 
 
 //        переключение стойки
@@ -56,37 +47,6 @@ class MainActivity : AppCompatActivity(),
         showTrickButton = findViewById(R.id.show_button)
         showTrickButton.setOnClickListener {
 //            println(fromListDialogDifficulty)
-
-            // ТУТ ЗАКОММЕНТИЛ СТАРУЮ РЕАЛИЗАЦИЮ
-/*//            Проверяем, что вернулось из MyDialogFragment
-            val (trickOneEighty: Boolean,
-                trickThreeSixty: Boolean,
-                trickGrabs: Boolean) = trick.tripleRotation(fromListDialog)
-
-//            Проверяем, что вернулось из CheckDifficultyFragment
-            val (easyTrick: Boolean,
-                mediumTrick: Boolean,
-                hardTrick: Boolean) = trickDifficulty.tripleDifficulty(fromListDialogDifficulty)
-
-//            Вызываем функцию для проверки сложности трюка
-            val checkDifficultyTrick = trickDifficulty.checkDifficultyGrab(
-                checkEasyTrick = easyTrick,
-                checkMediumTrick = mediumTrick,
-                checkHardTrick = hardTrick
-            )
-
-//            Вызываем функцию для проверки списка трюков
-            val checkRandomTrick = trick.checkTrick(
-                checkOneEighty = trickOneEighty,
-                checkThreeSixty = trickThreeSixty,
-                checkGrabs = trickGrabs
-            )
-
-//            Жмем на кнопку и передаем название трюка, ротацию и сложность в textView
-            val showTextResId = trick.getRandomTrickAll(
-                rotation = checkRandomTrick,
-                trick = checkDifficultyTrick
-            ).toString()*/
 
             if (fromListDialogRotation.isNotEmpty()) rotation.clear()
             fromListDialogRotation.forEach {
@@ -109,40 +69,16 @@ class MainActivity : AppCompatActivity(),
                     }
                 }
 
-//            showTextResId =
-
-//            val newSnowTrickList: Array<SnowboardTrick> = SnowboardTrick.grabsEasy + SnowboardTrick.grabsMedium
-//            val showTextResId = SnowboardTrick.grabsEasy.random().getTrick()
-
             showTrickView.text = allGrabs.flatten().random().getTrick()
 
-/*            when {
-                "Indy" in showTextResId && stance == "goofy" -> snowboardImg.setImageResource(R.drawable.goofy_indy)
-                "Melon" in showTextResId && stance == "goofy" -> snowboardImg.setImageResource(R.drawable.goofy_melon)
-                "Mute" in showTextResId && stance == "goofy" -> snowboardImg.setImageResource(R.drawable.goofy_mute)
-                "Nose" in showTextResId && stance == "goofy" -> snowboardImg.setImageResource(R.drawable.goofy_nose)
-                "Stalefish" in showTextResId && stance == "goofy" -> snowboardImg.setImageResource(R.drawable.goofy_stalefish)
-                "Tail" in showTextResId && stance == "goofy" -> snowboardImg.setImageResource(R.drawable.goofy_tail)
-                "Japan" in showTextResId && stance == "goofy" -> snowboardImg.setImageResource(R.drawable.goofy_japan)
-                "Slob" in showTextResId && stance == "goofy" -> snowboardImg.setImageResource(R.drawable.goofy_slob)
-                "Crail" in showTextResId && stance == "goofy" -> snowboardImg.setImageResource(R.drawable.goofy_crail)
-                "Stelmasky" in showTextResId && stance == "goofy" -> snowboardImg.setImageResource(R.drawable.goofy_stelmasky)
-                "Roast beef" in showTextResId && stance == "goofy" -> snowboardImg.setImageResource(R.drawable.goofy_roast_beef)
-                "Suit case" in showTextResId && stance == "goofy" -> snowboardImg.setImageResource(R.drawable.goofy_suitcase)
-                "Reach around" in showTextResId && stance == "goofy" -> snowboardImg.setImageResource(R.drawable.goofy_reach_around)
-                "Method" in showTextResId && stance == "goofy" -> snowboardImg.setImageResource(R.drawable.goofy_method)
-                "Crail" in showTextResId && stance == "regular" -> snowboardImg.setImageResource(R.drawable.goofy_crail)
-                "Suit case" in showTextResId && stance == "regular" -> snowboardImg.setImageResource(R.drawable.goofy_suitcase)
-                "Reach around" in showTextResId && stance == "regular" -> snowboardImg.setImageResource(R.drawable.goofy_reach_around)
-                "Rocket air" in showTextResId -> snowboardImg.setImageResource(R.drawable.rocket_air)
-                "Double tail" in showTextResId -> snowboardImg.setImageResource(R.drawable.double_tail)
-                "Cross rocket" in showTextResId -> snowboardImg.setImageResource(R.drawable.cross_rocket)
-            }*/
+//            запуск анимации появления из тени для текста трюка
+            animatorBoard.getFade(showTrickView)
 
         }
 //          Показываем алерт
         showMenuButton = findViewById(R.id.show_menu)
         showMenuButton.setOnClickListener {
+
             val checkRotationFragment = CheckRotationFragment()
             checkRotationFragment.show(supportFragmentManager, "show_menu")
         }
@@ -156,21 +92,18 @@ class MainActivity : AppCompatActivity(),
 //        нажимая на картинку борда начинаем вращать ее (анимация вращения)
         snowboardingImg = findViewById(R.id.snow_img)
         snowboardingImg.setOnClickListener {
-//            подгружаем анимации в переменные (по часовой и против часовой стрелки)
-            val clickClockWiseRotate = AnimationUtils.loadAnimation(
-                this,
-                R.anim.rotate_clockwise
-            )
-            val clickAntiClockWise = AnimationUtils.loadAnimation(
-                this,
-                R.anim.rotate_anticlockwise
-            )
+
+            // ВОТ ЭТО НАДО ПЕРЕДЕЛАТЬ
 //            воспроизводим анимацию в зависимости от направления вращения (direction)
             when {
-                "FS" in showTrickView.text && stance == Stance.Goofy    -> snowboardingImg.startAnimation(clickClockWiseRotate)
-                "BS" in showTrickView.text && stance == Stance.Goofy    -> snowboardingImg.startAnimation(clickAntiClockWise)
-                "BS" in showTrickView.text && stance == Stance.Regular  -> snowboardingImg.startAnimation(clickClockWiseRotate)
-                "FS" in showTrickView.text && stance == Stance.Regular  -> snowboardingImg.startAnimation(clickAntiClockWise)
+                "FS" in showTrickView.text && stance == Stance.Goofy && "180" in showTrickView.text   -> animatorBoard.getOneEightyClockWise()
+                "BS" in showTrickView.text && stance == Stance.Goofy && "180" in showTrickView.text   -> animatorBoard.getOneEightyAntiClockWise()
+                "BS" in showTrickView.text && stance == Stance.Regular && "180" in showTrickView.text -> animatorBoard.getOneEightyClockWise()
+                "FS" in showTrickView.text && stance == Stance.Regular && "180" in showTrickView.text -> animatorBoard.getOneEightyAntiClockWise()
+                "FS" in showTrickView.text && stance == Stance.Goofy && "360" in showTrickView.text   -> animatorBoard.getThreeSixtyClockWise()
+                "BS" in showTrickView.text && stance == Stance.Goofy && "360" in showTrickView.text   -> animatorBoard.getThreeSixtyAntiClockWise()
+                "BS" in showTrickView.text && stance == Stance.Regular && "360" in showTrickView.text -> animatorBoard.getThreeSixtyClockWise()
+                "FS" in showTrickView.text && stance == Stance.Regular && "360" in showTrickView.text -> animatorBoard.getThreeSixtyAntiClockWise()
             }
         }
     }
