@@ -10,155 +10,156 @@ var stance = Stance.Goofy
 @SuppressLint("StaticFieldLeak")
 lateinit var snowboardingImg: ImageView
 
-enum class SnowboardTrick(private val id: String) {
-    Melon("melon") {
-        override fun getTrick(): String {
+enum class SnowboardTrick(val id: String, val description: String) {
+    Melon("melon", "Схватить передней рукой\nВытянуться в FS, так будет красивей") {
+        override fun showTrick(): String {
             when (stance) {
                 Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_melon)
                 Stance.Regular -> snowboardingImg.setImageResource(R.drawable.regular_melon)
             }
-            return returnGrab(Melon, rotation)
+            return getFormatTrick(Melon, rotation)
         }
     },
-    Indy("indy") {
-        override fun getTrick(): String {
+    Indy("indy", "Взять задней рукой\nДля красоты лучше развернуться в BS") {
+        override fun showTrick(): String {
             when (stance) {
                 Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_indy)
                 Stance.Regular -> snowboardingImg.setImageResource(R.drawable.regular_indy)
             }
-            return returnGrab(Indy, rotation)
+            return getFormatTrick(Indy, rotation)
         }
     },
-    Mute("mute") {
-        override fun getTrick(): String {
+    Mute("mute","Передней рукой\nВыглядит оригинально при вращении в BS") {
+        override fun showTrick(): String {
             when (stance) {
                 Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_mute)
                 Stance.Regular -> snowboardingImg.setImageResource(R.drawable.regular_mute)
             }
-            return returnGrab(Mute, rotation)
+            return getFormatTrick(Mute, rotation)
         }
     },
-    Slob("slob") {
-        override fun getTrick(): String {
+    Slob("slob","Передней рукой\nВыпрямить заднюю ногу") {
+        override fun showTrick(): String {
             when (stance) {
                 Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_slob)
                 Stance.Regular -> snowboardingImg.setImageResource(R.drawable.regular_slob)
             }
-            return returnGrab(Slob, rotation)
+            return getFormatTrick(Slob, rotation)
         }
     },
-    Nose("nose") {
-        override fun getTrick(): String {
+    Nose("nose","Передней рукой\nЛучше подогнуть переднее колено") {
+        override fun showTrick(): String {
             when (stance) {
                 Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_nose)
                 Stance.Regular -> snowboardingImg.setImageResource(R.drawable.regular_nose)
             }
-            return returnGrab(Nose, rotation)
+            return getFormatTrick(Nose, rotation)
         }
     },
-    Tail("tail") {
-        override fun getTrick(): String {
+    Tail("tail","Задней рукой\nЛучше согнуть заднее колено") {
+        override fun showTrick(): String {
             when (stance) {
                 Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_tail)
                 Stance.Regular -> snowboardingImg.setImageResource(R.drawable.regular_tail)
             }
-            return returnGrab(Tail, rotation)
+            return getFormatTrick(Tail, rotation)
         }
     },
-    Stalefish("stalfish") {
-        override fun getTrick(): String {
+    Stalefish("stalfish","Задней рукой\nНе через ноги") {
+        override fun showTrick(): String {
             when (stance) {
                 Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_stalefish)
                 Stance.Regular -> snowboardingImg.setImageResource(R.drawable.regular_stalefish)
             }
-            return returnGrab(Stalefish, rotation)
+            return getFormatTrick(Stalefish, rotation)
         }
     },
-    Method("method") {
-        override fun getTrick(): String {
+    Method("method","Передней рукой\nМожно добавить не много магии") {
+        override fun showTrick(): String {
             when (stance) {
                 Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_method)
                 Stance.Regular -> snowboardingImg.setImageResource(R.drawable.regular_method)
             }
-            return returnGrab(Method, rotation)
+            return getFormatTrick(Method, rotation)
         }
     },
-    Japan("japan") {
-        override fun getTrick(): String {
+    Japan("japan","Передней рукой\nПереднее колено согнуть и направить вниз") {
+        override fun showTrick(): String {
             when (stance) {
                 Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_japan)
                 Stance.Regular -> snowboardingImg.setImageResource(R.drawable.regular_japan)
             }
-            return returnGrab(Japan, rotation)
+            return getFormatTrick(Japan, rotation)
         }
     },
-    Crail("crail") {
-        override fun getTrick(): String {
+    Crail("crail","Задней рукой\nЕщё можно хватать за нос доски") {
+        override fun showTrick(): String {
             when (stance) {
                 Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_crail)
                 Stance.Regular -> snowboardingImg.setImageResource(R.drawable.regular_crail)
             }
-            return returnGrab(Crail, rotation)
+            return getFormatTrick(Crail, rotation)
         }
     },
-    RocketAir("rocket air") {
-        override fun getTrick(): String {
+    RocketAir("rocket air","Двумя руками\nНичего сложного") {
+        override fun showTrick(): String {
             snowboardingImg.setImageResource(R.drawable.rocket_air)
-            return returnGrab(RocketAir, rotation)
+            return getFormatTrick(RocketAir, rotation)
         }
     },
-    Stelmasky("stelmasky") {
-        override fun getTrick(): String {
+    Stelmasky("stelmasky","Передней рукой\nРуку провести между ногами") {
+        override fun showTrick(): String {
             when (stance) {
                 Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_stelmasky)
                 Stance.Regular -> snowboardingImg.setImageResource(R.drawable.regular_stelmasky)
             }
-            return returnGrab(Stelmasky, rotation)
+            return getFormatTrick(Stelmasky, rotation)
         }
     },
-    RoastBeef("roast beef") {
-        override fun getTrick(): String {
+    RoastBeef("roast beef","Задней рукой\nЧерез ноги проводим руку") {
+        override fun showTrick(): String {
             when (stance) {
                 Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_roast_beef)
                 Stance.Regular -> snowboardingImg.setImageResource(R.drawable.regular_roast_beef)
             }
-            return returnGrab(RoastBeef, rotation)
+            return getFormatTrick(RoastBeef, rotation)
         }
     },
-    Suitcase("suitcase") {
-        override fun getTrick(): String {
+    Suitcase("suitcase","Держим передней рукой\nСхватить нужно через базу" +
+            "Трюк напоминает Method, но держать за другой кант") {
+        override fun showTrick(): String {
             when (stance) {
                 Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_suitcase)
                 Stance.Regular -> snowboardingImg.setImageResource(R.drawable.regular_suitcase)
             }
-            return returnGrab(Suitcase, rotation)
+            return getFormatTrick(Suitcase, rotation)
         }
     },
-    CrossRocket("cross rocket") {
-        override fun getTrick(): String {
+    CrossRocket("cross rocket","Двумя руками\nРуки скрещены") {
+        override fun showTrick(): String {
             snowboardingImg.setImageResource(R.drawable.cross_rocket)
-            return returnGrab(CrossRocket, rotation)
+            return getFormatTrick(CrossRocket, rotation)
         }
     },
-    DoubleTail("double tail") {
-        override fun getTrick(): String {
+    DoubleTail("double tail","Схватить обеими руками\nТянуться нужно через грудь") {
+        override fun showTrick(): String {
             snowboardingImg.setImageResource(R.drawable.double_tail)
-            return returnGrab(DoubleTail, rotation)
+            return getFormatTrick(DoubleTail, rotation)
         }
     },
-    ReachAround("reach around") {
-        override fun getTrick(): String {
+    ReachAround("reach around","Хватать передней рукой\nТянуться через спину") {
+        override fun showTrick(): String {
             when (stance) {
                 Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_reach_around)
                 Stance.Regular -> snowboardingImg.setImageResource(R.drawable.regular_reach_around)
             }
-            return returnGrab(ReachAround, rotation)
+            return getFormatTrick(ReachAround, rotation)
         }
     };
 
-    abstract fun getTrick(): String
+    abstract fun showTrick(): String
 
-    fun returnGrab(grab: SnowboardTrick, rotation: MutableSet<Int>): String {
+    fun getFormatTrick(grab: SnowboardTrick, rotation: MutableSet<Int>): String {
         return when (val rotationRandom = rotation.random()) {
             Rotation.Zero.id -> grab.id.upperFirstChar()
             else -> "${direction.random()} ${grab.id.upperFirstChar()} $rotationRandom"
