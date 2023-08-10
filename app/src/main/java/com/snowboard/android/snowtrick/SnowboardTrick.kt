@@ -163,13 +163,13 @@ enum class SnowboardTrick(val id: String, val description: String) {
         return when (val rotationRandom = rotation.random()) {
             Rotation.Zero.id -> grab.id.upperFirstChar()
             else -> "${direction.random()} ${grab.id.upperFirstChar()} $rotationRandom"
-        }
+            }
     }
     companion object {
         val grabsEasy = arrayOf(Melon, Indy, Mute, Slob, Nose, Tail, Stalefish, Method)
         val grabsMedium = arrayOf(Japan, Crail, RocketAir, Stelmasky, RoastBeef, Suitcase)
         val grabsHard = arrayOf(CrossRocket, DoubleTail, ReachAround, Method)
-        var allGrabs = arrayOf<Array<SnowboardTrick>>(grabsEasy)
+        var allGrabs = arrayOf<Array<SnowboardTrick>>(grabsEasy, grabsMedium)
     }
 }
 

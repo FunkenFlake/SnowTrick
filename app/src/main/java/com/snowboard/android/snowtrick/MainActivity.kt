@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity(),
         val stanceButton: ToggleButton = findViewById(R.id.stance_button)
         stanceButton.setOnCheckedChangeListener { _, isChecked ->
             stance = if (isChecked) Stance.Regular else Stance.Goofy
-            println(stance)
+//            println(stance)
         }
 
 //        Жмем по кнопке и получаем трюк
@@ -73,11 +73,11 @@ class MainActivity : AppCompatActivity(),
                 }
 
 //            тут генерируем трюк и показываем его в текстовом поле
-//            так же прослушиваем тап по текстовому полю, выводим описание
-
-            getGrab = allGrabs.flatten().random()
+            getGrab = allGrabs.flatten().shuffled().last()
+//            println(getGrab)
             getGrabFromDialog = getGrab
 
+//            прослушиваем тап по текстовому полю, выводим описание
             showTrickField.text = getGrab.showTrick()
             showTrickField.setOnClickListener {
                 showDescriptionTrick()
@@ -85,8 +85,8 @@ class MainActivity : AppCompatActivity(),
 
 //            запуск анимации появления из тени для текста трюка
             animatorBoard.getFade(showTrickField)
-
         }
+
 //          Показываем alertDialog - Rotation
         showMenuButton = findViewById(R.id.show_menu)
 
@@ -94,6 +94,7 @@ class MainActivity : AppCompatActivity(),
             val checkRotationFragment = CheckRotationFragment()
             checkRotationFragment.show(supportFragmentManager, "show_rotation")
         }
+
 //        Показываем alertDialog - Difficulty
         showDifficultyButton = findViewById(R.id.show_difficulty)
 
@@ -106,20 +107,8 @@ class MainActivity : AppCompatActivity(),
         snowboardingImg = findViewById(R.id.snow_img)
         snowboardingImg.setOnClickListener {
 
-            // ВОТ ЭТО НАДО ПЕРЕДЕЛАТЬ
-//            воспроизводим анимацию в зависимости от направления вращения (direction)
-
-            val goofyFS180 = "FS" in showTrickField.text && stance == Stance.Goofy && "180" in showTrickField.text
-            when {
-                 goofyFS180  -> animatorBoard.getOneEightyClockWise() // можно использовать это для рефакторинга, но вариант тоже так себе
-                "BS" in showTrickField.text && stance == Stance.Goofy && "180" in showTrickField.text   -> animatorBoard.getOneEightyAntiClockWise()
-                "BS" in showTrickField.text && stance == Stance.Regular && "180" in showTrickField.text -> animatorBoard.getOneEightyClockWise()
-                "FS" in showTrickField.text && stance == Stance.Regular && "180" in showTrickField.text -> animatorBoard.getOneEightyAntiClockWise()
-                "FS" in showTrickField.text && stance == Stance.Goofy && "360" in showTrickField.text   -> animatorBoard.getThreeSixtyClockWise()
-                "BS" in showTrickField.text && stance == Stance.Goofy && "360" in showTrickField.text   -> animatorBoard.getThreeSixtyAntiClockWise()
-                "BS" in showTrickField.text && stance == Stance.Regular && "360" in showTrickField.text -> animatorBoard.getThreeSixtyClockWise()
-                "FS" in showTrickField.text && stance == Stance.Regular && "360" in showTrickField.text -> animatorBoard.getThreeSixtyAntiClockWise()
-            }
+    //        проверяем и воспроизводим анимацию в зависимости от направления вращения (direction)
+            checkAndGetAnimation(showTrickField.text, stance)
         }
     }
 

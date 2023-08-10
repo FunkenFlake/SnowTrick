@@ -61,3 +61,24 @@ class RotationAnimation {
             }
     }
 }
+
+fun checkAndGetAnimation (trick: CharSequence, stance: Stance) {
+
+    val animation = RotationAnimation()
+
+    if (stance == Stance.Goofy) {
+        when {
+            "FS" in trick && "180" in trick -> animation.getOneEightyClockWise()
+            "BS" in trick && "180" in trick -> animation.getOneEightyAntiClockWise()
+            "FS" in trick && "360" in trick -> animation.getThreeSixtyClockWise()
+            "BS" in trick && "360" in trick -> animation.getThreeSixtyAntiClockWise()
+        }
+    } else {
+        when {
+            "BS" in trick && "180" in trick -> animation.getOneEightyClockWise()
+            "FS" in trick && "180" in trick -> animation.getOneEightyAntiClockWise()
+            "BS" in trick && "360" in trick -> animation.getThreeSixtyClockWise()
+            "FS" in trick && "360" in trick -> animation.getThreeSixtyAntiClockWise()
+        }
+    }
+}
