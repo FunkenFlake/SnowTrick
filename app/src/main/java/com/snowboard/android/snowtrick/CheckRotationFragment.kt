@@ -18,9 +18,8 @@ class CheckRotationFragment : DialogFragment() {
     }
 //    определяем интерфейс для возврата значения из диалогового окна
     interface OnDialogSelectedItems {
-        fun onSelectedItems(selectedItems: ArrayList<Int>)
+        fun onSelectedItemsRotation(selectedItems: ArrayList<Int>)
     }
-
 
 
 //    переопределяем адаптер (наверно) для передачи действий из MainActivity
@@ -52,7 +51,7 @@ class CheckRotationFragment : DialogFragment() {
                 }
                 .setPositiveButton(R.string.ok) { dialog, id ->
                     listener.onDialogPositiveClick(this)
-                    listenerItems.onSelectedItems(selectedItems)
+                    listenerItems.onSelectedItemsRotation(selectedItems)
                 }
                 .setNegativeButton(R.string.cancel) { dialog, id ->
                     listener.onDialogNegativeClick(this)

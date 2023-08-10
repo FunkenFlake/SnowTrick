@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity(),
     private var fromListDialogRotation: ArrayList<Int> = arrayListOf()
     private var fromListDialogDifficulty: ArrayList<Int> = arrayListOf()
 
-//    Переменные для кнопок и текст. полей ну и прочего
+//    Переменные для кнопок и текст. Полей ну и прочего
     lateinit var showTrickButton: Button
     private lateinit var showDifficultyButton: ImageButton
     private lateinit var showMenuButton: ImageButton
@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        экэемпляр анимаций
+//        экземпляр анимаций
         val animatorBoard = RotationAnimation()
 
 //        переключение стойки
@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity(),
                 }
 
 //            тут генерируем трюк и показываем его в текстовом поле
-//            так же прослушиваем тап по по текстовому полю, выводим описание
+//            так же прослушиваем тап по текстовому полю, выводим описание
 
             getGrab = allGrabs.flatten().random()
             getGrabFromDialog = getGrab
@@ -137,7 +137,7 @@ class MainActivity : AppCompatActivity(),
     }
 
 //    переопределяем функцию выбранных элементов в диалоге rotation и присваиваем их нашей переменной
-    override fun onSelectedItems(selectedItems: ArrayList<Int>) {
+    override fun onSelectedItemsRotation(selectedItems: ArrayList<Int>) {
         fromListDialogRotation = selectedItems
     }
 //    переопределяем функцию выбранных элементов в диалоге difficulty и присваиваем их нашей переменной
