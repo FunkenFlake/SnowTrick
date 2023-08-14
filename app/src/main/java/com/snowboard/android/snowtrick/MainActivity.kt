@@ -1,5 +1,6 @@
 package com.snowboard.android.snowtrick
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -109,6 +110,14 @@ class MainActivity : AppCompatActivity(),
 
     //        проверяем и воспроизводим анимацию в зависимости от направления вращения (direction)
             checkAndGetAnimation(showTrickField.text, stance)
+            println("check point")
+            println(someDes)
+            println(readFromAssets(
+                context = this,
+                fileName = "description-grabs.txt"))
+            println()
+
+//            println(getDescriptionGrab(getGrab))
         }
     }
 
