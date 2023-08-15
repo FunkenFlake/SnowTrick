@@ -14,7 +14,7 @@ class DescriptionTrick: DialogFragment() {
             val builder = AlertDialog.Builder(it)
             builder
                 .setTitle(R.string.description_trick)
-                .setMessage(getGrabFromDialog.description)
+                .setMessage("nothing")
                 .setPositiveButton(R.string.ok) { dialog, id ->
                     dialog.dismiss()
                 }

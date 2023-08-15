@@ -1,45 +1,32 @@
 package com.snowboard.android.snowtrick
 
 import android.content.Context
-import kotlinx.coroutines.withContext
-import java.io.BufferedReader
-import java.io.FileReader
-import java.io.InputStreamReader
-import java.io.FileInputStream
 
+class FormatDescriptionTrick
 
-//val descriptionDataGrabs = File("files/description-grabs.txt").readText()
-val someDes = FileInputStream("description-grabs.txt")
-val someStream = InputStreamReader(this.open("sldkfj"))
-//val someReadDes = BufferedReader(FileReader(someDes))
-fun readFromAssets(context: Context, fileName: String): String {
-    val readerFromAssets = BufferedReader(InputStreamReader(context.assets.open(fileName), "UTF-8"))
-    val sb = StringBuilder()
-    var line: String? = readerFromAssets.readLine()
-    while (line != null) {
-        sb.append(line)
-        line = readerFromAssets.readLine()
+fun Context.readTextFromAsset(fileName: String): String {
+    return assets.open(fileName).bufferedReader().use {
+        it.readText()
     }
-    readerFromAssets.close()
-    return sb.toString()
 }
 
+fun formatTextAsset(text: String): Map<String, String> {
+
+    val textRead = text
+        .split("\n")
+        .map { it.split("|") }
+
+    val textToMap = textRead.associate { (nameGrab, description) ->
+            nameGrab to description
+    }
+
+    return textToMap
+}
+
+fun getDescriptionGrab(grab: SnowboardTrick): String {
+    return formatTextAsset()
 
 
+    TODO()
+}
 
-
-
-
-
-
-//    .readText()
-//    .split("\n")
-//    .map { it.split("|")}
-
-//val grabDescriptionTuple = descriptionDataGrabs.associate { (nameGrab, description) ->
-//    nameGrab to description
-//}
-
-//fun getDescriptionGrab(grab: SnowboardTrick): String {
-//    return grabDescriptionTuple.getOrDefault(grab.id, "Unknown grabs :(")
-//}
