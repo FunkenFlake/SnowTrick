@@ -1,10 +1,11 @@
-package com.snowboard.android.snowtrick
+package com.snowboard.android.snowtrick.fragment
 
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
+import com.snowboard.android.snowtrick.R
 
 class CheckRotationFragment : DialogFragment() {
 
@@ -41,7 +42,8 @@ class CheckRotationFragment : DialogFragment() {
             val selectedItems = ArrayList<Int>()
             val builder = AlertDialog.Builder(it)
             builder.setTitle(R.string.choose_rotation)
-                .setMultiChoiceItems(R.array.rotation, null
+                .setMultiChoiceItems(
+                    R.array.rotation, null
                 ) { _, which, isChecked ->
                     if (isChecked) {
                         selectedItems.add(which)

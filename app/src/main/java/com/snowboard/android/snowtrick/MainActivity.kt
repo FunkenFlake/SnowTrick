@@ -11,6 +11,12 @@ import com.snowboard.android.snowtrick.SnowboardTrick.Companion.allGrabs
 import com.snowboard.android.snowtrick.SnowboardTrick.Companion.grabsEasy
 import com.snowboard.android.snowtrick.SnowboardTrick.Companion.grabsMedium
 import com.snowboard.android.snowtrick.SnowboardTrick.Companion.grabsHard
+import com.snowboard.android.snowtrick.animation.RotationAnimation
+import com.snowboard.android.snowtrick.animation.checkAndGetAnimation
+import com.snowboard.android.snowtrick.fragment.CheckDifficultyFragment
+import com.snowboard.android.snowtrick.fragment.CheckRotationFragment
+import com.snowboard.android.snowtrick.fragment.DescriptionTrick
+import com.snowboard.android.snowtrick.fragment.getGrabFromDialog
 
 class MainActivity : AppCompatActivity(),
     CheckRotationFragment.MyDialogListener,
@@ -109,6 +115,7 @@ class MainActivity : AppCompatActivity(),
 
     //        проверяем и воспроизводим анимацию в зависимости от направления вращения (direction)
             checkAndGetAnimation(showTrickField.text, stance)
+//            println("check point")
         }
     }
 
