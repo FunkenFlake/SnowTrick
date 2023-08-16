@@ -1,6 +1,5 @@
 package com.snowboard.android.snowtrick
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -12,10 +11,12 @@ import com.snowboard.android.snowtrick.SnowboardTrick.Companion.allGrabs
 import com.snowboard.android.snowtrick.SnowboardTrick.Companion.grabsEasy
 import com.snowboard.android.snowtrick.SnowboardTrick.Companion.grabsMedium
 import com.snowboard.android.snowtrick.SnowboardTrick.Companion.grabsHard
-import java.io.BufferedReader
-import java.io.FileInputStream
-import java.io.InputStream
-import java.io.InputStreamReader
+import com.snowboard.android.snowtrick.animation.RotationAnimation
+import com.snowboard.android.snowtrick.animation.checkAndGetAnimation
+import com.snowboard.android.snowtrick.fragment.CheckDifficultyFragment
+import com.snowboard.android.snowtrick.fragment.CheckRotationFragment
+import com.snowboard.android.snowtrick.fragment.DescriptionTrick
+import com.snowboard.android.snowtrick.fragment.getGrabFromDialog
 
 class MainActivity : AppCompatActivity(),
     CheckRotationFragment.MyDialogListener,
@@ -114,18 +115,7 @@ class MainActivity : AppCompatActivity(),
 
     //        проверяем и воспроизводим анимацию в зависимости от направления вращения (direction)
             checkAndGetAnimation(showTrickField.text, stance)
-            println("check point")
-//            println(readTextFromAsset("description-grabs.txt"))
-
-//            val myInputStream: InputStream = assets.open("description-grabs.txt")
-//            val someDes = BufferedReader(InputStreamReader(this.assets.open("description-grabs.txt"), "UTF-8"))
-//            println(someDes)
-//            println(readFromAssets(
-//                context = this,
-//                fileName = "description-grabs.txt"))
-//            println()
-
-//            println(getDescriptionGrab(getGrab))
+//            println("check point")
         }
     }
 

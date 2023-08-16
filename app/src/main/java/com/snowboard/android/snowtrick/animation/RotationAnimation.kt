@@ -1,9 +1,11 @@
-package com.snowboard.android.snowtrick
+package com.snowboard.android.snowtrick.animation
 
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.TextView
 import androidx.core.view.ViewCompat
 import androidx.core.view.ViewPropertyAnimatorCompat
+import com.snowboard.android.snowtrick.Stance
+import com.snowboard.android.snowtrick.snowboardingImg
 
 class RotationAnimation {
 

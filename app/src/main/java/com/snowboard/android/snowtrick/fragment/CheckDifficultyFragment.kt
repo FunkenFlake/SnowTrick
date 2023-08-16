@@ -1,10 +1,11 @@
-package com.snowboard.android.snowtrick
+package com.snowboard.android.snowtrick.fragment
 
 import android.app.Dialog
 import androidx.fragment.app.DialogFragment
 import android.content.Context
 import android.os.Bundle
 import android.app.AlertDialog
+import com.snowboard.android.snowtrick.R
 
 class CheckDifficultyFragment: DialogFragment() {
 
@@ -28,7 +29,8 @@ class CheckDifficultyFragment: DialogFragment() {
             val selectedItems = ArrayList<Int>()
             val builder = AlertDialog.Builder(it)
             builder.setTitle("Select difficulty:")
-                .setMultiChoiceItems(R.array.difficulty, null
+                .setMultiChoiceItems(
+                    R.array.difficulty, null
                 ) { _, which, isChecked ->
                     if (isChecked) {
                         selectedItems.add(which)

@@ -2,6 +2,7 @@ package com.snowboard.android.snowtrick
 
 import android.annotation.SuppressLint
 import android.widget.ImageView
+import com.snowboard.android.snowtrick.ext.upperFirstChar
 
 private val direction = arrayOf(Direction.BS, Direction.FS)
 var rotation = mutableSetOf(Rotation.OneEighty.id, Rotation.ThreeSixty.id)
@@ -10,8 +11,8 @@ var stance = Stance.Goofy
 @SuppressLint("StaticFieldLeak")
 lateinit var snowboardingImg: ImageView
 
-enum class SnowboardTrick(val id: String, val description: String) {
-    Melon("melon", "Схватить передней рукой\nВытянуться в FS, так будет красивей") {
+enum class SnowboardTrick(val id: String) {
+    Melon("melon") {
         override fun showTrick(): String {
             when (stance) {
                 Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_melon)
@@ -20,7 +21,7 @@ enum class SnowboardTrick(val id: String, val description: String) {
             return getFormatTrick(Melon, rotation)
         }
     },
-    Indy("indy", "Взять задней рукой\nДля красоты лучше развернуться в BS") {
+    Indy("indy") {
         override fun showTrick(): String {
             when (stance) {
                 Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_indy)
@@ -29,7 +30,7 @@ enum class SnowboardTrick(val id: String, val description: String) {
             return getFormatTrick(Indy, rotation)
         }
     },
-    Mute("mute","Передней рукой\nВыглядит оригинально при вращении в BS") {
+    Mute("mute") {
         override fun showTrick(): String {
             when (stance) {
                 Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_mute)
@@ -38,7 +39,7 @@ enum class SnowboardTrick(val id: String, val description: String) {
             return getFormatTrick(Mute, rotation)
         }
     },
-    Slob("slob","Передней рукой\nВыпрямить заднюю ногу") {
+    Slob("slob") {
         override fun showTrick(): String {
             when (stance) {
                 Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_slob)
@@ -47,7 +48,7 @@ enum class SnowboardTrick(val id: String, val description: String) {
             return getFormatTrick(Slob, rotation)
         }
     },
-    Nose("nose","Передней рукой\nЛучше подогнуть переднее колено") {
+    Nose("nose") {
         override fun showTrick(): String {
             when (stance) {
                 Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_nose)
@@ -56,7 +57,7 @@ enum class SnowboardTrick(val id: String, val description: String) {
             return getFormatTrick(Nose, rotation)
         }
     },
-    Tail("tail","Задней рукой\nЛучше согнуть заднее колено") {
+    Tail("tail") {
         override fun showTrick(): String {
             when (stance) {
                 Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_tail)
@@ -65,7 +66,7 @@ enum class SnowboardTrick(val id: String, val description: String) {
             return getFormatTrick(Tail, rotation)
         }
     },
-    Stalefish("stalfish","Задней рукой\nНе через ноги") {
+    Stalefish("stalfish") {
         override fun showTrick(): String {
             when (stance) {
                 Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_stalefish)
@@ -74,7 +75,7 @@ enum class SnowboardTrick(val id: String, val description: String) {
             return getFormatTrick(Stalefish, rotation)
         }
     },
-    Method("method","Передней рукой\nМожно добавить не много магии") {
+    Method("method") {
         override fun showTrick(): String {
             when (stance) {
                 Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_method)
@@ -83,7 +84,7 @@ enum class SnowboardTrick(val id: String, val description: String) {
             return getFormatTrick(Method, rotation)
         }
     },
-    Japan("japan","Передней рукой\nПереднее колено согнуть и направить вниз") {
+    Japan("japan") {
         override fun showTrick(): String {
             when (stance) {
                 Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_japan)
@@ -92,7 +93,7 @@ enum class SnowboardTrick(val id: String, val description: String) {
             return getFormatTrick(Japan, rotation)
         }
     },
-    Crail("crail","Задней рукой\nЕщё можно хватать за нос доски") {
+    Crail("crail") {
         override fun showTrick(): String {
             when (stance) {
                 Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_crail)
@@ -101,13 +102,13 @@ enum class SnowboardTrick(val id: String, val description: String) {
             return getFormatTrick(Crail, rotation)
         }
     },
-    RocketAir("rocket air","Двумя руками\nНичего сложного") {
+    RocketAir("rocket air") {
         override fun showTrick(): String {
             snowboardingImg.setImageResource(R.drawable.rocket_air)
             return getFormatTrick(RocketAir, rotation)
         }
     },
-    Stelmasky("stelmasky","Передней рукой\nРуку провести между ногами") {
+    Stelmasky("stelmasky") {
         override fun showTrick(): String {
             when (stance) {
                 Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_stelmasky)
@@ -116,7 +117,7 @@ enum class SnowboardTrick(val id: String, val description: String) {
             return getFormatTrick(Stelmasky, rotation)
         }
     },
-    RoastBeef("roast beef","Задней рукой\nЧерез ноги проводим руку") {
+    RoastBeef("roast beef") {
         override fun showTrick(): String {
             when (stance) {
                 Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_roast_beef)
@@ -125,8 +126,7 @@ enum class SnowboardTrick(val id: String, val description: String) {
             return getFormatTrick(RoastBeef, rotation)
         }
     },
-    Suitcase("suitcase","Держим передней рукой\nСхватить нужно через базу" +
-            "Трюк напоминает Method, но держать за другой кант") {
+    Suitcase("suitcase") {
         override fun showTrick(): String {
             when (stance) {
                 Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_suitcase)
@@ -135,19 +135,19 @@ enum class SnowboardTrick(val id: String, val description: String) {
             return getFormatTrick(Suitcase, rotation)
         }
     },
-    CrossRocket("cross rocket","Двумя руками\nРуки скрещены") {
+    CrossRocket("cross rocket",) {
         override fun showTrick(): String {
             snowboardingImg.setImageResource(R.drawable.cross_rocket)
             return getFormatTrick(CrossRocket, rotation)
         }
     },
-    DoubleTail("double tail","Схватить обеими руками\nТянуться нужно через грудь") {
+    DoubleTail("double tail") {
         override fun showTrick(): String {
             snowboardingImg.setImageResource(R.drawable.double_tail)
             return getFormatTrick(DoubleTail, rotation)
         }
     },
-    ReachAround("reach around","Хватать передней рукой\nТянуться через спину") {
+    ReachAround("reach around") {
         override fun showTrick(): String {
             when (stance) {
                 Stance.Goofy -> snowboardingImg.setImageResource(R.drawable.goofy_reach_around)
