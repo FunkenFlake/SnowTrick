@@ -13,6 +13,7 @@ import com.snowboard.android.snowtrick.SnowboardTrick.Companion.grabsMedium
 import com.snowboard.android.snowtrick.SnowboardTrick.Companion.grabsHard
 import com.snowboard.android.snowtrick.animation.RotationAnimation
 import com.snowboard.android.snowtrick.animation.checkAndGetAnimation
+import com.snowboard.android.snowtrick.databinding.ActivityMainBinding
 import com.snowboard.android.snowtrick.fragment.CheckDifficultyFragment
 import com.snowboard.android.snowtrick.fragment.CheckRotationFragment
 import com.snowboard.android.snowtrick.fragment.DescriptionTrick
@@ -35,24 +36,30 @@ class MainActivity : AppCompatActivity(),
     private lateinit var showTextResId: String
     lateinit var getGrab: SnowboardTrick
 
+    private var _binding: ActivityMainBinding? = null
+    private val binding
+        get() = _binding ?: throw IllegalStateException("Binding for ActivityMainBinding " +
+                "must not be null")
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        _binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
 //        экземпляр анимаций
         val animatorBoard = RotationAnimation()
 
 //        переключение стойки
-        val stanceButton: ToggleButton = findViewById(R.id.tbtnStance)
+        val stanceButton: ToggleButton = binding.tbtnStance
         stanceButton.setOnCheckedChangeListener { _, isChecked ->
             stance = if (isChecked) Stance.Regular else Stance.Goofy
 //            println(stance)
         }
 
 //        Жмем по кнопке и получаем трюк
-        showTrickField = findViewById(R.id.tvShowTrick)
-        showTrickButton = findViewById(R.id.btnShowButton)
+        showTrickField = binding.tvShowTrick
+        showTrickButton = binding.btnShowButton
         showTrickButton.setOnClickListener {
 //            println(fromListDialogDifficulty)
 
@@ -94,7 +101,7 @@ class MainActivity : AppCompatActivity(),
         }
 
 //          Показываем alertDialog - Rotation
-        showMenuButton = findViewById(R.id.ibtnShowMenu)
+        showMenuButton = binding.ibtnShowMenu
 
         showMenuButton.setOnClickListener {
             val checkRotationFragment = CheckRotationFragment()
@@ -102,7 +109,7 @@ class MainActivity : AppCompatActivity(),
         }
 
 //        Показываем alertDialog - Difficulty
-        showDifficultyButton = findViewById(R.id.ibtnShowDifficulty)
+        showDifficultyButton = binding.ibtnShowDifficulty
 
         showDifficultyButton.setOnClickListener {
             val difficultyFragment = CheckDifficultyFragment()
@@ -110,7 +117,7 @@ class MainActivity : AppCompatActivity(),
         }
 
 //        нажимая на картинку борда начинаем вращать ее (анимация вращения)
-        snowboardingImg = findViewById(R.id.ivSnowboard)
+        snowboardingImg = binding.ivSnowboard
         snowboardingImg.setOnClickListener {
 
     //        проверяем и воспроизводим анимацию в зависимости от направления вращения (direction)
