@@ -10,7 +10,7 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/show_trick_view"
+        android:id="@+id/tvShowTrick"
         android:layout_width="320dp"
         android:layout_height="72dp"
         android:layout_marginTop="70dp"
@@ -27,37 +27,19 @@
         android:background="@color/teal_200" />
 
     <ImageButton
-        android:id="@+id/show_difficulty"
-        android:layout_width="40dp"
-        android:layout_height="30dp"
-        android:layout_gravity="right"
+        android:id="@+id/ibtnShowDifficulty"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="40dp"
-        android:background="@null"
-        android:scaleType="centerInside"
+        style="@style/ibtnSettings"
         android:src="@drawable/difficulty" />
 
     <ImageButton
-        android:id="@+id/show_menu"
-        android:layout_width="40dp"
-        android:layout_height="30dp"
-        android:layout_gravity="right"
+        android:id="@+id/ibtnShowMenu"
         android:layout_marginTop="5dp"
-        android:layout_marginEnd="40dp"
-        android:background="@null"
-        android:scaleType="centerInside"
+        style="@style/ibtnSettings"
         android:src="@drawable/rotate" />
 
-    <!--    <Button-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:text="Spin"-->
-    <!--        android:background="@drawable/button_shape"-->
-    <!--        app:icon="@drawable/rotate_short"-->
-    <!--        app:iconGravity="end"/>-->
-
     <ImageView
-        android:id="@+id/snow_img"
+        android:id="@+id/ivSnowboard"
         android:layout_width="100dp"
         android:layout_height="420dp"
         android:layout_gravity="center"
@@ -74,7 +56,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/show_button"
+            android:id="@+id/btnShowButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/button_shape"
@@ -84,12 +66,12 @@
     </LinearLayout>
 
     <ToggleButton
-        android:id="@+id/stance_button"
+        android:id="@+id/tbtnStance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@null"
         android:checked="false"
-        android:textOff="Goofy"
-        android:textOn="Regular" />
+        android:textOff="@string/goofy"
+        android:textOn="@string/regular" />
 
 </LinearLayout>

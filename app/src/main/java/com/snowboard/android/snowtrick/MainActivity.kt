@@ -44,15 +44,15 @@ class MainActivity : AppCompatActivity(),
         val animatorBoard = RotationAnimation()
 
 //        переключение стойки
-        val stanceButton: ToggleButton = findViewById(R.id.stance_button)
+        val stanceButton: ToggleButton = findViewById(R.id.tbtnStance)
         stanceButton.setOnCheckedChangeListener { _, isChecked ->
             stance = if (isChecked) Stance.Regular else Stance.Goofy
 //            println(stance)
         }
 
 //        Жмем по кнопке и получаем трюк
-        showTrickField = findViewById(R.id.show_trick_view)
-        showTrickButton = findViewById(R.id.show_button)
+        showTrickField = findViewById(R.id.tvShowTrick)
+        showTrickButton = findViewById(R.id.btnShowButton)
         showTrickButton.setOnClickListener {
 //            println(fromListDialogDifficulty)
 
@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity(),
         }
 
 //          Показываем alertDialog - Rotation
-        showMenuButton = findViewById(R.id.show_menu)
+        showMenuButton = findViewById(R.id.ibtnShowMenu)
 
         showMenuButton.setOnClickListener {
             val checkRotationFragment = CheckRotationFragment()
@@ -102,7 +102,7 @@ class MainActivity : AppCompatActivity(),
         }
 
 //        Показываем alertDialog - Difficulty
-        showDifficultyButton = findViewById(R.id.show_difficulty)
+        showDifficultyButton = findViewById(R.id.ibtnShowDifficulty)
 
         showDifficultyButton.setOnClickListener {
             val difficultyFragment = CheckDifficultyFragment()
@@ -110,7 +110,7 @@ class MainActivity : AppCompatActivity(),
         }
 
 //        нажимая на картинку борда начинаем вращать ее (анимация вращения)
-        snowboardingImg = findViewById(R.id.snow_img)
+        snowboardingImg = findViewById(R.id.ivSnowboard)
         snowboardingImg.setOnClickListener {
 
     //        проверяем и воспроизводим анимацию в зависимости от направления вращения (direction)
