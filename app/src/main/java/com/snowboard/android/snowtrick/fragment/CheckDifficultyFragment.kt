@@ -11,24 +11,28 @@ class CheckDifficultyFragment: DialogFragment() {
 
     lateinit var listenerItems: OnDialogSelectedItems
 
+    //    определяем интерфейс для возврата значения из диалогового окна
     interface OnDialogSelectedItems {
         fun onSelectedItemsDifficulty(selectedItems: ArrayList<Int>)
     }
 
+//    переопределяем адаптер для передачи действий из MainActivity
     override fun onAttach(context: Context) {
         super.onAttach(context)
         try {
+//            слушатель кнопок (сохраняет в себе выбранные элементы)
             listenerItems = context as OnDialogSelectedItems
         } catch (e: ClassCastException) {
             throw ClassCastException((context.toString() + "must implement CheckDifficultyFragment"))
         }
     }
 
+//    создаем диалог
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             val selectedItems = ArrayList<Int>()
             val builder = AlertDialog.Builder(it)
-            builder.setTitle("Select difficulty:")
+            builder.setTitle(R.string.choose_difficulty)
                 .setMultiChoiceItems(
                     R.array.difficulty, null
                 ) { _, which, isChecked ->

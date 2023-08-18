@@ -33,7 +33,7 @@
         android:src="@drawable/difficulty" />
 
     <ImageButton
-        android:id="@+id/ibtnShowMenu"
+        android:id="@+id/ibtnShowRotation"
         android:layout_marginTop="5dp"
         style="@style/ibtnSettings"
         android:src="@drawable/rotate" />

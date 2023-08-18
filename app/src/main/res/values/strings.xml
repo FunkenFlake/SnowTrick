@@ -8,6 +8,7 @@
     <string name="ok">Ok</string>
     <string name="cancel">Cancel</string>
     <string name="choose_rotation">Select rotation:</string>
+    <string name="choose_difficulty">Select difficulty:</string>
     <string name="description_trick">Description trick:</string>
     <string name="goofy">Goofy</string>
     <string name="regular">Regular</string>

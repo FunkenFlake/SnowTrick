@@ -9,31 +9,22 @@ import com.snowboard.android.snowtrick.R
 
 class CheckRotationFragment : DialogFragment() {
 
-    lateinit var listener: MyDialogListener
     lateinit var listenerItems: OnDialogSelectedItems
 
-//    определяем интерфейс для действия кнопок ok и cancel
-    interface MyDialogListener {
-        fun onDialogPositiveClick(dialog: DialogFragment)
-        fun onDialogNegativeClick(dialog: DialogFragment)
-    }
 //    определяем интерфейс для возврата значения из диалогового окна
     interface OnDialogSelectedItems {
         fun onSelectedItemsRotation(selectedItems: ArrayList<Int>)
     }
 
-
 //    переопределяем адаптер (наверно) для передачи действий из MainActivity
     override fun onAttach(context: Context) {
         super.onAttach(context)
         try {
-//            слушатель для кнопок
-            listener = context as MyDialogListener
+//            слушатель для кнопок (сохраняет в себе выбранные элементы)
+            listenerItems = context as OnDialogSelectedItems
         } catch (e: ClassCastException) {
             throw ClassCastException((context.toString() + "must implement MyDialogListener"))
         }
-//    слушатель, который сохраняет в себе выбранные элементы
-        listenerItems = context as OnDialogSelectedItems
     }
 
 //    создаем диалог
@@ -52,14 +43,11 @@ class CheckRotationFragment : DialogFragment() {
                     }
                 }
                 .setPositiveButton(R.string.ok) { dialog, id ->
-                    listener.onDialogPositiveClick(this)
                     listenerItems.onSelectedItemsRotation(selectedItems)
                 }
                 .setNegativeButton(R.string.cancel) { dialog, id ->
-                    listener.onDialogNegativeClick(this)
                     dialog.dismiss()
                 }
-
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }

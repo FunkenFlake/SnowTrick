@@ -6,7 +6,6 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.ToggleButton
-import androidx.fragment.app.DialogFragment
 import com.snowboard.android.snowtrick.SnowboardTrick.Companion.allGrabs
 import com.snowboard.android.snowtrick.SnowboardTrick.Companion.grabsEasy
 import com.snowboard.android.snowtrick.SnowboardTrick.Companion.grabsMedium
@@ -20,7 +19,6 @@ import com.snowboard.android.snowtrick.fragment.DescriptionTrick
 import com.snowboard.android.snowtrick.fragment.getGrabFromDialog
 
 class MainActivity : AppCompatActivity(),
-    CheckRotationFragment.MyDialogListener,
     CheckRotationFragment.OnDialogSelectedItems,
     CheckDifficultyFragment.OnDialogSelectedItems {
 
@@ -48,17 +46,18 @@ class MainActivity : AppCompatActivity(),
         setContentView(binding.root)
 
 //        экземпляр анимаций
-        val animatorBoard = RotationAnimation()
+        val animationForBoard = RotationAnimation()
 
-//        переключение стойки
+//        определяем стойку в tbtnStance
         val stanceButton: ToggleButton = binding.tbtnStance
         stanceButton.setOnCheckedChangeListener { _, isChecked ->
             stance = if (isChecked) Stance.Regular else Stance.Goofy
 //            println(stance)
         }
 
-//        Жмем по кнопке и получаем трюк
         showTrickField = binding.tvShowTrick
+
+//        Жмем по btnShowButton и получаем трюк
         showTrickButton = binding.btnShowButton
         showTrickButton.setOnClickListener {
 //            println(fromListDialogDifficulty)
@@ -97,11 +96,11 @@ class MainActivity : AppCompatActivity(),
             }
 
 //            запуск анимации появления из тени для текста трюка
-            animatorBoard.getFade(showTrickField)
+            animationForBoard.getFade(showTrickField)
         }
 
 //          Показываем alertDialog - Rotation
-        showMenuButton = binding.ibtnShowMenu
+        showMenuButton = binding.ibtnShowRotation
 
         showMenuButton.setOnClickListener {
             val checkRotationFragment = CheckRotationFragment()
@@ -126,32 +125,18 @@ class MainActivity : AppCompatActivity(),
         }
     }
 
-                    // ТУТ НАДО ПЕРЕБРАТЬ ВСЕ ИЛИ ХОТЯ БЫ ЧАСТЬ
-                    // это очень важно, даже капсом написал!
-
-    //    Назначаем перезаписью действие для кнопки "ОК"
-    override fun onDialogPositiveClick(dialog: DialogFragment) {
-
-    }
-
-//    Назначаем перезаписью действие для кнопки "Cancel"
-    override fun onDialogNegativeClick(dialog: DialogFragment) {
-        //надо сделать отмену (вроде сделал, надо убрать коммент)
-    }
-
 //    переопределяем функцию выбранных элементов в диалоге rotation и присваиваем их нашей переменной
     override fun onSelectedItemsRotation(selectedItems: ArrayList<Int>) {
         fromListDialogRotation = selectedItems
     }
+
 //    переопределяем функцию выбранных элементов в диалоге difficulty и присваиваем их нашей переменной
     override fun onSelectedItemsDifficulty(selectedItems: ArrayList<Int>) {
         fromListDialogDifficulty = selectedItems
     }
 
-    fun showDescriptionTrick() {
+    private fun showDescriptionTrick() {
         val description = DescriptionTrick()
-
         description.show(supportFragmentManager, "description")
     }
-
 }
