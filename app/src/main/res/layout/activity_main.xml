@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/button_shape"
             android:text="@string/show_button"
-            android:textAllCaps="false" />
+            android:textAllCaps="true" />
 
     </LinearLayout>
 

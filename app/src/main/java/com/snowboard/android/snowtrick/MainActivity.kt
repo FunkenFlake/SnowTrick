@@ -27,17 +27,22 @@ class MainActivity : AppCompatActivity(),
     private var fromListDialogDifficulty: ArrayList<Int> = arrayListOf()
 
 //    Переменные для кнопок и текст. Полей ну и прочего
-    lateinit var showTrickButton: Button
+    private lateinit var showTrickButton: Button
     private lateinit var showDifficultyButton: ImageButton
     private lateinit var showMenuButton: ImageButton
-    lateinit var showTrickField: TextView
-    private lateinit var showTextResId: String
-    lateinit var getGrab: SnowboardTrick
 
+    private var _showTrickField: TextView? = null
+    private val showTrickField
+        get() = _showTrickField ?: throw IllegalStateException("Property showTrickField can't be null")
+
+    private var _getGrab: SnowboardTrick? = null
+    private val getGrab
+        get() = _getGrab ?: throw IllegalStateException("Property getGrab can't be null")
+
+    private val errorBinding = "Binding for ActivityMainBinding must not be null"
     private var _binding: ActivityMainBinding? = null
     private val binding
-        get() = _binding ?: throw IllegalStateException("Binding for ActivityMainBinding " +
-                "must not be null")
+        get() = _binding ?: throw IllegalStateException(errorBinding)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,7 +60,7 @@ class MainActivity : AppCompatActivity(),
 //            println(stance)
         }
 
-        showTrickField = binding.tvShowTrick
+        _showTrickField = binding.tvShowTrick
 
 //        Жмем по btnShowButton и получаем трюк
         showTrickButton = binding.btnShowButton
@@ -85,7 +90,7 @@ class MainActivity : AppCompatActivity(),
                 }
 
 //            тут генерируем трюк и показываем его в текстовом поле
-            getGrab = allGrabs.flatten().shuffled().last()
+            _getGrab = allGrabs.flatten().shuffled().last()
 //            println(getGrab)
             getGrabFromDialog = getGrab
 
