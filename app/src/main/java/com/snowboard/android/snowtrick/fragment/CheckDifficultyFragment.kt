@@ -9,7 +9,10 @@ import com.snowboard.android.snowtrick.R
 
 class CheckDifficultyFragment: DialogFragment() {
 
-    lateinit var listenerItems: OnDialogSelectedItems
+    private var _listenerItems: OnDialogSelectedItems? = null
+    private val listenerItems
+        get() = _listenerItems ?: throw IllegalStateException ("Property listenerItems for " +
+                "CheckDifficultyFragment must not be null")
 
     //    определяем интерфейс для возврата значения из диалогового окна
     interface OnDialogSelectedItems {
@@ -21,7 +24,7 @@ class CheckDifficultyFragment: DialogFragment() {
         super.onAttach(context)
         try {
 //            слушатель кнопок (сохраняет в себе выбранные элементы)
-            listenerItems = context as OnDialogSelectedItems
+            _listenerItems = context as OnDialogSelectedItems
         } catch (e: ClassCastException) {
             throw ClassCastException((context.toString() + "must implement CheckDifficultyFragment"))
         }
@@ -49,6 +52,6 @@ class CheckDifficultyFragment: DialogFragment() {
                     dialog.dismiss()
                 }
             builder.create()
-        } ?: throw IllegalStateException("Activity cannot be null")
+        } ?: throw IllegalStateException("Activity for CheckDifficultyFragment cannot be null")
     }
 }
