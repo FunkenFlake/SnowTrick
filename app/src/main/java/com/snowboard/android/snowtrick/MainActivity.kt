@@ -26,10 +26,9 @@ class MainActivity : AppCompatActivity(),
     private var fromListDialogRotation: ArrayList<Int> = arrayListOf()
     private var fromListDialogDifficulty: ArrayList<Int> = arrayListOf()
 
-//    Переменные для кнопок и текст. Полей ну и прочего
     private lateinit var showTrickButton: Button
     private lateinit var showDifficultyButton: ImageButton
-    private lateinit var showMenuButton: ImageButton
+    private lateinit var showRotationButton: ImageButton
     private lateinit var showTrickField: TextView
 
     private var _getGrab: SnowboardTrick? = null
@@ -39,7 +38,6 @@ class MainActivity : AppCompatActivity(),
     private var _binding: ActivityMainBinding? = null
     private val binding
         get() = _binding ?: throw IllegalStateException("Binding for ActivityMainBinding must not be null")
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +51,6 @@ class MainActivity : AppCompatActivity(),
         val stanceButton: ToggleButton = binding.tbtnStance
         stanceButton.setOnCheckedChangeListener { _, isChecked ->
             stance = if (isChecked) Stance.Regular else Stance.Goofy
-//            println(stance)
         }
 
         showTrickField = binding.tvShowTrick
@@ -61,7 +58,6 @@ class MainActivity : AppCompatActivity(),
 //        Жмем по btnShowButton и получаем трюк
         showTrickButton = binding.btnShowButton
         showTrickButton.setOnClickListener {
-//            println(fromListDialogDifficulty)
 
             // Если список fromListDialogRotation не пустой, то чистим список rotation
             // и добавляем в него выбранные пользователем вращения.
@@ -87,7 +83,7 @@ class MainActivity : AppCompatActivity(),
 
 //            тут генерируем трюк и показываем его в текстовом поле
             _getGrab = allGrabs.flatten().shuffled().last()
-//            println(getGrab)
+
             getGrabFromDialog = getGrab
 
 //            прослушиваем тап по текстовому полю, выводим описание
@@ -100,15 +96,15 @@ class MainActivity : AppCompatActivity(),
             animationForBoard.getFade(showTrickField)
         }
 
-//          Показываем alertDialog - Rotation
-        showMenuButton = binding.ibtnShowRotation
+//          Показываем rotationFragment
+        showRotationButton = binding.ibtnShowRotation
 
-        showMenuButton.setOnClickListener {
-            val checkRotationFragment = CheckRotationFragment()
-            checkRotationFragment.show(supportFragmentManager, "show_rotation")
+        showRotationButton.setOnClickListener {
+            val rotationFragment = CheckRotationFragment()
+            rotationFragment.show(supportFragmentManager, "show_rotation")
         }
 
-//        Показываем alertDialog - Difficulty
+//        Показываем difficultyFragment
         showDifficultyButton = binding.ibtnShowDifficulty
 
         showDifficultyButton.setOnClickListener {
@@ -122,7 +118,6 @@ class MainActivity : AppCompatActivity(),
 
     //        проверяем и воспроизводим анимацию в зависимости от направления вращения (direction)
             checkAndGetAnimation(showTrickField.text, stance)
-//            println("check point")
         }
     }
 

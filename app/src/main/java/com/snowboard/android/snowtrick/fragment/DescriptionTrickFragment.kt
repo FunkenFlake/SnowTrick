@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import com.snowboard.android.snowtrick.R
 import com.snowboard.android.snowtrick.SnowboardTrick
-import com.snowboard.android.snowtrick.ext.formatTextAssets
+import com.snowboard.android.snowtrick.ext.getFormatTextAssets
 import com.snowboard.android.snowtrick.ext.getDescriptionTricks
 import com.snowboard.android.snowtrick.ext.readTextFromAsset
 import com.snowboard.android.snowtrick.ext.errorUnknownGrab
@@ -23,7 +23,7 @@ class DescriptionTrick: DialogFragment() {
                 .setTitle(R.string.description_trick)
                 .setMessage(context
                     ?.readTextFromAsset(grabsDataPath)
-                    ?.formatTextAssets()
+                    ?.getFormatTextAssets()
                     ?.getDescriptionTricks(getGrabFromDialog)
                     ?:errorUnknownGrab
                 )

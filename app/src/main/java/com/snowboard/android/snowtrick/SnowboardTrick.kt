@@ -135,7 +135,7 @@ enum class SnowboardTrick(val id: String) {
             return getFormatTrick(Suitcase, rotation)
         }
     },
-    CrossRocket("cross rocket",) {
+    CrossRocket("cross rocket") {
         override fun showTrick(): String {
             snowboardingImg.setImageResource(R.drawable.cross_rocket)
             return getFormatTrick(CrossRocket, rotation)

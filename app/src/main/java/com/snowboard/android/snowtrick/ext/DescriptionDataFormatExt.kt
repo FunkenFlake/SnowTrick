@@ -13,7 +13,7 @@ fun Context.readTextFromAsset(fileName: String): String {
 }
 
 // преобразование прочитанного текста (из readTextFromAsset) в ассоциативный массив
-fun String.formatTextAssets(): Map<String, String> {
+fun String.getFormatTextAssets(): Map<String, String> {
     val textRead = this
         .split("\n")
         .map { it.split("|")}

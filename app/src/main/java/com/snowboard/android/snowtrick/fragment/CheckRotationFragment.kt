@@ -19,7 +19,7 @@ class CheckRotationFragment : DialogFragment() {
         fun onSelectedItemsRotation(selectedItems: ArrayList<Int>)
     }
 
-//    переопределяем адаптер (наверно) для передачи действий из MainActivity
+//    переопределяем адаптер для передачи действий из MainActivity
     override fun onAttach(context: Context) {
         super.onAttach(context)
         try {
